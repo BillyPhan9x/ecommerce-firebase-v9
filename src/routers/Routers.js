@@ -9,6 +9,8 @@ import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import NotFoundPage from "../pages/NotFoundPage";
 
+import ProtectedRoute from "./ProtectedRoute";
+
 const Routers = () => {
   return (
     <Routes>
@@ -17,7 +19,14 @@ const Routers = () => {
       <Route path="shop" element={<ShopPage />} />
       <Route path="shop/:id" element={<ProductDetailPage />} />
       <Route path="cart" element={<CartPage />} />
-      <Route path="checkout" element={<CheckoutPage />} />
+      <Route
+        path="checkout"
+        element={
+          <ProtectedRoute>
+            <CheckoutPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="*" element={<NotFoundPage />} />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useCallback } from "react";
 
 import "../../styles/clock.css";
 
@@ -8,9 +9,8 @@ const Clock = () => {
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
 
-  let interval;
-
-  const countDown = () => {
+  const countDown = useCallback(() => {
+    let interval;
     const destination = new Date("Dec 7, 2022").getTime();
 
     interval = setInterval(() => {
@@ -32,11 +32,11 @@ const Clock = () => {
         setSeconds(seconds);
       }
     });
-  };
+  }, []);
 
   useEffect(() => {
     countDown();
-  }, []);
+  }, [countDown]);
 
   return (
     <div className="clock__wrapper d-flex align-items-center gap-3">
